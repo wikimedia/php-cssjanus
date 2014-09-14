@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true" strict="true" verbose="true">
+	<testsuites>
+		<testsuite name="CSSJanus Test Suite">
+			<directory>./suites/</directory>
+		</testsuite>
+	</testsuites>
+	<groups>
+		<exclude>
+			<group>Broken</group>
+		</exclude>
+	</groups>
+	<filter>
+		<whitelist>
+			<directory>./</directory>
+			<exclude>
+				<directory>./suites</directory>
+			</exclude>
+		</whitelist>
+	</filter>
+</phpunit>

@@ -158,6 +158,17 @@ class CSSJanusTest extends PHPUnit_Framework_TestCase {
 			),
 			// border-radius assigns different meanings to the values
 			array(
+				'.foo { border-radius: 1px; }'
+			),
+			array(
+				'.foo { border-radius: 1px 2px; }',
+				'.foo { border-radius: 2px 1px; }'
+			),
+			array(
+				'.foo { border-radius: 1px 2px 3px 4px; }',
+				'.foo { border-radius: 2px 1px 4px 3px; }'
+			),
+			array(
 				'.foo { border-radius: .25em 15px 0pt 0ex; }',
 				'.foo { border-radius: 15px .25em 0ex 0pt; }'
 			),

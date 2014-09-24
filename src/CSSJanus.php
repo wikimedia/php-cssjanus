@@ -115,7 +115,7 @@ class CSSJanus {
 		$patterns['four_notation_quantity_props'] = "((?:margin|padding|border-width)\s*:\s*)";
 		$patterns['four_notation_quantity'] = "/{$patterns['four_notation_quantity_props']}{$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s*[;}])/i";
 		$patterns['four_notation_color'] = "/(-color\s*:\s*){$patterns['color']}(\s+){$patterns['color']}(\s+){$patterns['color']}(\s+){$patterns['color']}(\s*[;}])/i";
-		$patterns['border_radius'] = "/(border-radius\s*:\s*){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s*[;}])/i";
+		$patterns['border_radius'] = "/(border-radius\s*:\s*)([^;}]*)/";
 		$patterns['box_shadow'] = "/(box-shadow\s*:\s*(?:inset\s*)?){$patterns['possibly_negative_quantity']}/i";
 		$patterns['text_shadow1'] = "/(text-shadow\s*:\s*){$patterns['color']}(\s*){$patterns['possibly_negative_quantity']}/i";
 		$patterns['text_shadow2'] = "/(text-shadow\s*:\s*){$patterns['possibly_negative_quantity']}/i";
@@ -268,14 +268,27 @@ class CSSJanus {
 	}
 
 	/**
-	 * Swaps appropriate corners in four-part border-radius rules.
+	 * Swaps appropriate corners in border-radius values.
 	 *
 	 * @param $css string
 	 * @return string
 	 */
 	private static function fixBorderRadius( $css ) {
-		// Do the real thing
-		$css = preg_replace( self::$patterns['border_radius'], '$1$4$3$2$5$8$7$6$9', $css );
+		$css = preg_replace_callback( self::$patterns['border_radius'], function ( $matches ) {
+			$pre = $matches[1];
+			$values = $matches[2];
+			$numValues = count( preg_split( '/\s+/', trim( $values ) ) );
+			switch ( $numValues ) {
+				case 4:
+					$values = preg_replace( '/^(\S+)(\s*)(\S+)(\s*)(\S+)(\s*)(\S+)/', '$3$2$1$4$7$6$5', $values );
+					break;
+				case 3:
+				case 2:
+					$values = preg_replace( '/^(\S+)(\s*)(\S+)/', '$3$2$1', $values );
+					break;
+			}
+			return $pre . $values;
+		}, $css );
 
 		return $css;
 	}

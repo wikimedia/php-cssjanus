@@ -55,7 +55,7 @@ class CSSJanus {
 		'lookahead_not_letter' => '(?![a-zA-Z])',
 		'lookbehind_not_letter' => '(?<![a-zA-Z])',
 		'chars_within_selector' => '[^\}]*?',
-		'noflip_annotation' => '\/\*\s*@noflip\s*\*\/',
+		'noflip_annotation' => '\/\*\!?\s*@noflip\s*\*\/',
 		'noflip_single' => null,
 		'noflip_class' => null,
 		'comment' => '/\/\*[^*]*\*+([^\/*][^*]*\*+)*\//',

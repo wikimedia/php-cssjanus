@@ -423,6 +423,10 @@ class CSSJanusTest extends PHPUnit_Framework_TestCase {
 				'/* @noflip */ div { float: left; }'
 			),
 			array(
+				// before selector (single)
+				'/*! @noflip */ div { float: left; }'
+			),
+			array(
 				// before selector (multiple)
 				'/* @noflip */ div, .notme { float: left; }'
 			),

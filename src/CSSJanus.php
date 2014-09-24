@@ -118,10 +118,9 @@ class CSSJanus {
 		$patterns['box_shadow'] = "/(box-shadow\s*:\s*(?:inset\s*)?){$patterns['possibly_negative_quantity']}/i";
 		$patterns['text_shadow1'] = "/(text-shadow\s*:\s*){$patterns['color']}(\s*){$patterns['possibly_negative_quantity']}/i";
 		$patterns['text_shadow2'] = "/(text-shadow\s*:\s*){$patterns['possibly_negative_quantity']}/i";
-		// The two regexes below are parenthesized differently then in the original implementation to make the
-		// callback's job more straightforward
-		$patterns['bg_horizontal_percentage'] = "/(background(?:-position)?\s*:\s*[^%]*?)(-?{$patterns['num']})(%\s*(?:{$patterns['quantity']}|{$patterns['ident']}))/";
-		$patterns['bg_horizontal_percentage_x'] = "/(background-position-x\s*:\s*)(-?{$patterns['num']})(%)/";
+		$patterns['bg_horizontal_percentage'] = "/(background(?:-position)?\s*:\s*(?:[^:;}\s]+\s+)*?)({$patterns['quantity']})/i";
+		$patterns['bg_horizontal_percentage_x'] = "/(background-position-x\s*:\s*)(-?{$patterns['num']}%)/i";
+
 	}
 
 	/**
@@ -324,14 +323,20 @@ class CSSJanus {
 	 * @return string
 	 */
 	private static function fixBackgroundPosition( $css ) {
-		$replaced = preg_replace_callback( self::$patterns['bg_horizontal_percentage'],
-			array( 'self', 'calculateNewBackgroundPosition' ), $css );
+		$replaced = preg_replace_callback(
+			self::$patterns['bg_horizontal_percentage'],
+			array( 'self', 'calculateNewBackgroundPosition' ),
+			$css
+		);
 		if ( $replaced !== null ) {
-			// Check for null; sometimes preg_replace_callback() returns null here for some weird reason
+			// preg_replace_callback() sometimes returns null
 			$css = $replaced;
 		}
-		$replaced = preg_replace_callback( self::$patterns['bg_horizontal_percentage_x'],
-			array( 'self', 'calculateNewBackgroundPosition' ), $css );
+		$replaced = preg_replace_callback(
+			self::$patterns['bg_horizontal_percentage_x'],
+			array( 'self', 'calculateNewBackgroundPosition' ),
+			$css
+		);
 		if ( $replaced !== null ) {
 			$css = $replaced;
 		}
@@ -340,12 +345,22 @@ class CSSJanus {
 	}
 
 	/**
-	 * Callback for calculateNewBackgroundPosition()
+	 * Callback for fixBackgroundPosition()
 	 * @param $matches array
 	 * @return string
 	 */
 	private static function calculateNewBackgroundPosition( $matches ) {
-		return $matches[1] . ( 100 - $matches[2] ) . $matches[3];
+		$value = $matches[2];
+		if ( substr( $value, -1 ) === '%' ) {
+			$idx = strpos( $value, '.' );
+			if ( $idx !== false ) {
+				$len = strlen( $value ) - $idx - 2;
+				$value = number_format( 100 - $value, $len ) . '%';
+			} else {
+				$value = ( 100 - $value ) . '%';
+			}
+		}
+		return $matches[1] . $value;
 	}
 }
 

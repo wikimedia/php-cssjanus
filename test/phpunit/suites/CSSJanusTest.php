@@ -358,8 +358,30 @@ class CSSJanusTest extends PHPUnit_Framework_TestCase {
 				'.foo { background: #fff url(/foo/bar.png) no-repeat top right; }'
 			),
 			array(
+				'.foo { background: url(/foo/bar.png) 23% 40%; }',
+				'.foo { background: url(/foo/bar.png) 77% 40%; }'
+			),
+			array(
+				'.foo { background: url(/foo/bar.png) 23%; }',
+				'.foo { background: url(/foo/bar.png) 77%; }'
+			),
+			array(
 				'.foo { background-position: 100% 40%; }',
 				'.foo { background-position: 0% 40%; }'
+			),
+			array(
+				'.foo { background-position: 2.3% 40%; }',
+				'.foo { background-position: 97.7% 40%; }'
+			),
+			array(
+				'.foo { background-position: 2.3210% 40%; }',
+				'.foo { background-position: 97.6790% 40%; }'
+			),
+			array(
+				'.foo { background-position: 10px 23%; }',
+			),
+			array(
+				'.foo { background-position: 10px 2.3%; }',
 			),
 			array(
 				'.foo { background-position: 23% 0; }',

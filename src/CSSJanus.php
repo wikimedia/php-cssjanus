@@ -112,7 +112,8 @@ class CSSJanus {
 		$patterns['rtl_in_url'] = "/{$patterns['lookbehind_not_letter']}(rtl){$patterns['lookahead_for_closing_paren']}/i";
 		$patterns['cursor_east'] = "/{$patterns['lookbehind_not_letter']}([ns]?)e-resize/";
 		$patterns['cursor_west'] = "/{$patterns['lookbehind_not_letter']}([ns]?)w-resize/";
-		$patterns['four_notation_quantity'] = "/(:\s*){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s*[;}])/i";
+		$patterns['four_notation_quantity_props'] = "((?:margin|padding|border-width)\s*:\s*)";
+		$patterns['four_notation_quantity'] = "/{$patterns['four_notation_quantity_props']}{$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s*[;}])/i";
 		$patterns['four_notation_color'] = "/(-color\s*:\s*){$patterns['color']}(\s+){$patterns['color']}(\s+){$patterns['color']}(\s+){$patterns['color']}(\s*[;}])/i";
 		$patterns['border_radius'] = "/(border-radius\s*:\s*){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s*[;}])/i";
 		$patterns['box_shadow'] = "/(box-shadow\s*:\s*(?:inset\s*)?){$patterns['possibly_negative_quantity']}/i";
@@ -268,14 +269,11 @@ class CSSJanus {
 
 	/**
 	 * Swaps appropriate corners in four-part border-radius rules.
-	 * Needs to undo the effect of fixFourPartNotation() on those rules, too.
 	 *
 	 * @param $css string
 	 * @return string
 	 */
 	private static function fixBorderRadius( $css ) {
-		// Undo four_notation_quantity
-		$css = preg_replace( self::$patterns['border_radius'], '$1$2$3$8$5$6$7$4$9', $css );
 		// Do the real thing
 		$css = preg_replace( self::$patterns['border_radius'], '$1$4$3$2$5$8$7$6$9', $css );
 

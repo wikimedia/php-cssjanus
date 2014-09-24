@@ -114,7 +114,7 @@ class CSSJanus {
 		$patterns['cursor_west'] = "/{$patterns['lookbehind_not_letter']}([ns]?)w-resize/";
 		$patterns['four_notation_quantity_props'] = "((?:margin|padding|border-width)\s*:\s*)";
 		$patterns['four_notation_quantity'] = "/{$patterns['four_notation_quantity_props']}{$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s*[;}])/i";
-		$patterns['four_notation_color'] = "/(-color\s*:\s*){$patterns['color']}(\s+){$patterns['color']}(\s+){$patterns['color']}(\s+){$patterns['color']}(\s*[;}])/i";
+		$patterns['four_notation_color'] = "/((?:-color|border-style)\s*:\s*){$patterns['color']}(\s+){$patterns['color']}(\s+){$patterns['color']}(\s+){$patterns['color']}(\s*[;}])/i";
 		$patterns['border_radius'] = "/(border-radius\s*:\s*)([^;}]*)/";
 		$patterns['box_shadow'] = "/(box-shadow\s*:\s*(?:inset\s*)?){$patterns['possibly_negative_quantity']}/i";
 		$patterns['text_shadow1'] = "/(text-shadow\s*:\s*){$patterns['color']}(\s*){$patterns['possibly_negative_quantity']}/i";

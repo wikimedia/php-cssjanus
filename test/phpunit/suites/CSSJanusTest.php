@@ -201,6 +201,10 @@ class CSSJanusTest extends PHPUnit_Framework_TestCase {
 				'.foo { border-color: red hsla(0, 100%, 50%, 0.5) hsl(0, 100%, 50%) #f00 }',
 			),
 			array(
+				'.foo { border-style: none dotted dashed solid; }',
+				'.foo { border-style: none solid dashed dotted; }',
+			),
+			array(
 				// Do not mangle 5 or more values
 				'.foo { -x-unknown: 1 2 3 4 5; }'
 			),

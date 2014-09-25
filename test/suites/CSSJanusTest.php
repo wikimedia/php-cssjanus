@@ -3,18 +3,18 @@
 class CSSJanusTest extends PHPUnit_Framework_TestCase {
 
 	public static function provideData() {
-		$data = json_decode( file_get_contents( __DIR__ . '/../../data.json' ), /* $assoc = */ true );
+		$data = json_decode(file_get_contents(__DIR__ . '/../data.json'), /* $assoc = */ true);
 		$cases = array();
 		$defaultSettings = array(
 			'swapLtrRtlInUrl' => false,
 			'swapLeftRightInUrl' => false,
 		);
-		foreach ( $data as $name => $test ) {
-			$settings = isset( $test['settings'] ) ? $test['settings'] : array();
+		foreach ($data as $name => $test) {
+			$settings = isset($test['settings']) ? $test['settings'] : array();
 			$settings += $defaultSettings;
-			foreach ( $test['cases'] as $i => $case ) {
+			foreach ($test['cases'] as $i => $case) {
 				$input = $case[0];
-				$noop = !isset( $case[1] );
+				$noop = !isset($case[1]);
 				$output = $noop ? $input : $case[1];
 
 				$cases[] = array(
@@ -24,7 +24,7 @@ class CSSJanusTest extends PHPUnit_Framework_TestCase {
 					$name,
 				);
 
-				if ( !$noop ) {
+				if (!$noop) {
 					// Round trip
 					$cases[] = array(
 						$output,
@@ -41,10 +41,10 @@ class CSSJanusTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideData
 	 */
-	public function testTransform( $input, $settings, $output, $name ) {
+	public function testTransform($input, $settings, $output, $name) {
 		$this->assertEquals(
 			$output,
-			CSSJanus::transform( $input, $settings['swapLtrRtlInUrl'], $settings['swapLeftRightInUrl'] ),
+			CSSJanus::transform($input, $settings['swapLtrRtlInUrl'], $settings['swapLeftRightInUrl']),
 			$name
 		);
 	}

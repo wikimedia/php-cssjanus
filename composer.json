@@ -1,0 +1,11 @@
+{
+	"autoload": {
+		"psr-0": {
+			"": "src/"
+		}
+	},
+	"require-dev": {
+		"jakub-onderka/php-parallel-lint": "0.7.*",
+		"phpunit/phpunit": "3.7.*"
+	}
+}

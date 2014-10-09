@@ -2,7 +2,7 @@
 
 # CSSJanus
 
-Convert CSS stylesheets between left-to-right and right-to-left. This is a PHP port of [CSSJanus](https://code.google.com/p/cssjanus/) (written in Python).
+Convert CSS stylesheets between left-to-right and right-to-left.
 
 ## Basic usage
 
@@ -34,6 +34,12 @@ Use a ```/* @noflip */``` comment to protect a rule from being changed.
 }
 ```
 
-## Issue tracker
+## Port
 
-Feature requests and bugs should usually be filed upstream at [CSSJanus](https://github.com/cssjanus/cssjanus).
+This is a PHP port of the Node.js implementation of CSSJanus.
+
+Feature requests and bugs related to the actual CSS transformation or test
+cases of it, should be submitted upstream at
+<https://github.com/cssjanus/cssjanus>.
+
+Upstream releases will be ported here.

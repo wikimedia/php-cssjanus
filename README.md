@@ -5,6 +5,7 @@
 Convert CSS stylesheets between left-to-right and right-to-left. This is a PHP port of [CSSJanus](https://code.google.com/p/cssjanus/) (written in Python).
 
 ## Basic usage
+
 ```php
 $rtlCss = CSSJanus::transform( $ltrCss );
 ```
@@ -18,6 +19,7 @@ $rtlCss = CSSJanus::transform( $ltrCss );
 * ``$swapLeftRightInURL`` (boolean) Swap 'left' and 'right' in URLs
 
 ### Preventing flipping
+
 Use a ```/* @noflip */``` comment to protect a rule from being changed.
 
 ```css
@@ -32,5 +34,6 @@ Use a ```/* @noflip */``` comment to protect a rule from being changed.
 }
 ```
 
-## Additional Resources
-* [node-cssjanus](https://github.com/cssjanus/node-cssjanus)
+## Issue tracker
+
+Feature requests and bugs should usually be filed upstream at [CSSJanus](https://github.com/cssjanus/cssjanus).

@@ -14,5 +14,8 @@
 		"jakub-onderka/php-parallel-lint": "0.8.*",
 		"phpunit/phpunit": "3.7.*",
 		"squizlabs/php_codesniffer": "1.*"
+	},
+	"scripts": {
+		"test": "parallel-lint --exclude vendor . && phpunit && phpcs . --standard=./test/codesniffer --ignore=vendor/* --report=full -s --tab-width=4"
 	}
 }

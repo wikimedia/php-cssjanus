@@ -3,5 +3,5 @@ set -e
 cd $(cd $(dirname $0)/..; pwd)
 set -x
 ./vendor/bin/parallel-lint --exclude vendor .
-./vendor/bin/phpunit --configuration test/phpunit.xml
+./vendor/bin/phpunit
 ./vendor/bin/phpcs . --standard=./test/codesniffer --ignore=vendor/* --report=full -s --tab-width=4

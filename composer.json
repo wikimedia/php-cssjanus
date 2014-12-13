@@ -16,6 +16,10 @@
 		"squizlabs/php_codesniffer": "1.*"
 	},
 	"scripts": {
-		"test": "parallel-lint --exclude vendor . && phpunit && phpcs . --standard=./test/codesniffer --ignore=vendor/* --tab-width=4"
+		"test": [
+			"parallel-lint --exclude vendor .",
+			"phpunit",
+			"phpcs . --standard=./test/codesniffer --ignore=vendor/* --tab-width=4"
+		]
 	}
 }

@@ -135,12 +135,27 @@ class CSSJanus {
 
 	/**
 	 * Transform an LTR stylesheet to RTL
-	 * @param string $css stylesheet to transform
-	 * @param $swapLtrRtlInURL Boolean: If true, swap 'ltr' and 'rtl' in URLs
-	 * @param $swapLeftRightInURL Boolean: If true, swap 'left' and 'right' in URLs
+	 * @param string $css Stylesheet to transform
+	 * @param array|bool $options Options array or value of transformDirInUrl option (back-compat)
+	 * @param bool $options['transformDirInUrl'] Transform directions in URLs (ltr/rtl). Default: false.
+	 * @param bool $options['transformEdgeInUrl'] Transform edges in URLs (left/right). Default: false.
+	 * @param bool $transformEdgeInUrl [optional] For back-compat
 	 * @return string Transformed stylesheet
 	 */
-	public static function transform($css, $swapLtrRtlInURL = false, $swapLeftRightInURL = false) {
+	public static function transform($css, $options = array(), $transformEdgeInUrl = false) {
+		if (!is_array($options)) {
+			$options = array(
+				'transformDirInUrl' => (bool)$options,
+				'transformEdgeInUrl' => (bool)$transformEdgeInUrl,
+			);
+		}
+
+		// Defaults
+		$options += array(
+			'transformDirInUrl' => false,
+			'transformEdgeInUrl' => false,
+		);
+
 		// We wrap tokens in ` , not ~ like the original implementation does.
 		// This was done because ` is not a legal character in CSS and can only
 		// occur in URLs, where we escape it to %60 before inserting our tokens.
@@ -162,11 +177,11 @@ class CSSJanus {
 
 		// LTR->RTL fixes start here
 		$css = self::fixDirection($css);
-		if ($swapLtrRtlInURL) {
+		if ($options['transformDirInUrl']) {
 			$css = self::fixLtrRtlInURL($css);
 		}
 
-		if ($swapLeftRightInURL) {
+		if ($options['transformEdgeInUrl']) {
 			$css = self::fixLeftRightInURL($css);
 		}
 		$css = self::fixLeftAndRight($css);

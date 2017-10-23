@@ -12,7 +12,9 @@ install:
 script:
   - composer test
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - wget https://github.com/php-coveralls/php-coveralls/releases/download/v1.0.2/coveralls.phar
+  - chmod +x coveralls.phar
+  - ./coveralls.phar -v
 notifications:
   irc:
     channels:

@@ -1,5 +1,5 @@
 /clover.xml
 /composer.lock
 /coverage
-/test/data-v*.json
+/test/data-*
 /vendor

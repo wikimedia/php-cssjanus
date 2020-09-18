@@ -4,23 +4,27 @@
 
 Convert CSS stylesheets between left-to-right and right-to-left.
 
-## Basic usage
+## Usage
+
+```php
+transform( string $css, bool $swapLtrInURL = false, bool $swapLeftInURL = false ) : string
+```
+
+Parameters;
+
+* ``$css`` (string) Stylesheet to transform.
+* ``$swapLtrInURL`` (boolean) Swap `ltr` to `rtl` direction in URLs.
+* ``$swapLeftInURL`` (boolean) Swap `left` and `right` edges in URLs.
+
+Example:
 
 ```php
 $rtlCss = CSSJanus::transform( $ltrCss );
 ```
 
-## Advanced usage
-
-``transform( $css, $swapLtrRtlInURL = false, $swapLeftRightInURL = false )``
-
-* ``$css`` (string) Stylesheet to transform
-* ``$swapLtrRtlInURL`` (boolean) Swap 'ltr' and 'rtl' in URLs
-* ``$swapLeftRightInURL`` (boolean) Swap 'left' and 'right' in URLs
-
 ### Preventing flipping
 
-Use a ```/* @noflip */``` comment to protect a rule from being changed.
+If a rule is not meant to be flipped by CSSJanus, use a `/* @noflip */` comment to protect the rule.
 
 ```css
 .rule1 {
@@ -33,6 +37,10 @@ Use a ```/* @noflip */``` comment to protect a rule from being changed.
   margin-left: 1em;
 }
 ```
+
+## Who uses CSSJanus?
+
+* **[Wikimedia Foundation](https://www.wikimedia.org/)**, the non-profit behind Wikipedia and other free knowledge projects.<br/>Used in [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki), on [Wikipedia](https://ar.wikipedia.org/), and [other projects](https://doc.wikimedia.org/).
 
 ## Port
 

@@ -1,15 +1,18 @@
-sudo: false
-dist: trusty
 language: php
 php:
+  - "7.4"
   - "7.3"
   - "7.2"
+env:
+  global:
+    # Since PHP 7.3, php-xdebug is disabled by default unless this is set.
+    - XDEBUG_MODE=coverage
 install:
   - composer install
 script:
   - composer test
 after_success:
-  - wget https://github.com/php-coveralls/php-coveralls/releases/download/v1.0.2/coveralls.phar
+  - wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.4.3/coveralls.phar
   - chmod +x coveralls.phar
   - ./coveralls.phar -v
 notifications:

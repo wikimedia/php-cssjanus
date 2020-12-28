@@ -1,10 +1,11 @@
 <?php
 /**
- * PHP port of CSSJanus.
- * https://github.com/cssjanus/php-cssjanus
+ * PHP port of CSSJanus. https://github.com/cssjanus/php-cssjanus
  *
- * Copyright 2008 Google Inc.
+ * Copyright 2020 Timo Tijhof
+ * Copyright 2014 Trevor Parscal
  * Copyright 2010 Roan Kattouw
+ * Copyright 2008 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,13 +23,8 @@
  */
 
 /**
- * This is a PHP port of CSSJanus, a utility that transforms CSS style sheets
- * written for LTR to RTL.
- *
- * Original code: http://code.google.com/p/cssjanus/source/browse/trunk/cssjanus.py
- *
- * @author Lindsey Simon <elsigh@google.com>
- * @author Roan Kattouw
+ * CSSJanus is a a utility that converts CSS stylesheets
+ * from left-to-right (LTR) to right-to-left (RTL).
  */
 class CSSJanus {
 	// Patterns defined as null are built dynamically by buildPatterns()
@@ -476,7 +472,6 @@ class CSSJanus {
 /**
  * Utility class used by CSSJanus that tokenizes and untokenizes things we want
  * to protect from being janused.
- * @author Roan Kattouw
  */
 class CSSJanusTokenizer {
 	private $regex;

@@ -44,10 +44,10 @@ If a rule is not meant to be flipped by CSSJanus, use a `/* @noflip */` comment 
 
 ## Port
 
-This is a PHP port of the Node.js implementation of CSSJanus.
+This is a PHP port of the Node.js implementation of CSSJanus, and was originally
+based on a [Google project](http://code.google.com/p/cssjanus/).
 
-Feature requests and bugs related to the actual CSS transformation or test
-cases of it, should be submitted upstream at
-<https://github.com/cssjanus/cssjanus>.
+Feature requests and bugs related to the actual CSS transformation logic or test
+cases of it, should be submitted upstream at <https://github.com/cssjanus/cssjanus>.
 
 Upstream releases will be ported here.

@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/cssjanus/php-cssjanus.svg?branch=master)](https://travis-ci.com/cssjanus/php-cssjanus) [![Packagist](https://img.shields.io/packagist/v/cssjanus/cssjanus.svg?style=flat)](https://packagist.org/packages/cssjanus/cssjanus) [![Coverage Status](https://coveralls.io/repos/github/cssjanus/php-cssjanus/badge.svg?branch=master)](https://coveralls.io/github/cssjanus/php-cssjanus?branch=master)
+[![Build Status](https://travis-ci.com/cssjanus/php-cssjanus.svg?branch=main)](https://travis-ci.com/cssjanus/php-cssjanus) [![Packagist](https://img.shields.io/packagist/v/cssjanus/cssjanus.svg?style=flat)](https://packagist.org/packages/cssjanus/cssjanus) [![Coverage Status](https://coveralls.io/repos/github/cssjanus/php-cssjanus/badge.svg?branch=main)](https://coveralls.io/github/cssjanus/php-cssjanus?branch=main)
 
 # CSSJanus
 

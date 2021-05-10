@@ -13,9 +13,9 @@ install:
 script:
   - composer test
 after_success:
-  - wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.4.3/coveralls.phar
-  - chmod +x coveralls.phar
-  - ./coveralls.phar -v
+  - wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.4.3/php-coveralls.phar
+  - chmod +x php-coveralls.phar
+  - ./php-coveralls.phar -v
 notifications:
   irc:
     channels:

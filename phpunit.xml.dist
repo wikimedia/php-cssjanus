@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="vendor/autoload.php" colors="true">
+<phpunit colors="true"
+	beStrictAboutTestsThatDoNotTestAnything="true"
+	beStrictAboutOutputDuringTests="true">
 	<testsuites>
-		<testsuite name="CSSJanus Test Suite">
+		<testsuite name="Tests">
 			<directory>./test/suites</directory>
 		</testsuite>
 	</testsuites>

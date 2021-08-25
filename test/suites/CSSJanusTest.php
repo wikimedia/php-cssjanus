@@ -64,7 +64,9 @@ class CSSJanusTest extends PHPUnit\Framework\TestCase {
 			$file = "$dir/data-v$version.json";
 			if (!is_readable($file)) {
 				array_map('unlink', glob("$dir/data-v*.json"));
-				$json = file_get_contents("https://github.com/cssjanus/cssjanus/raw/v$version/test/data.json");
+				$json = file_get_contents(
+					"https://raw.githubusercontent.com/cssjanus/cssjanus/v$version/test/data.json"
+				);
 				if ($json === false) {
 					throw new Exception('Failed to fetch data');
 				}

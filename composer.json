@@ -2,6 +2,7 @@
 	"name": "cssjanus/cssjanus",
 	"description": "Convert CSS stylesheets between left-to-right and right-to-left.",
 	"license": "Apache-2.0",
+	"homepage": "https://www.mediawiki.org/wiki/CSSJanus",
 	"authors": [
 		{
 			"name": "Roan Kattouw"
@@ -35,9 +36,9 @@
 			"@phan"
 		],
 		"cover": "phpunit --coverage-html coverage",
+		"phan": "phan --allow-polyfill-parser",
 		"fix": [
 			"phpcbf"
-		],
-		"phan": "phan --allow-polyfill-parser --no-progress-bar"
+		]
 	}
 }

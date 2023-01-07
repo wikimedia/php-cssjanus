@@ -310,7 +310,7 @@ class CSSJanus {
 	private static function fixBorderRadius($css) {
 		return preg_replace_callback(
 			self::$patterns['border_radius'],
-			array('self', 'calculateBorderRadius'),
+			array(self::class, 'calculateBorderRadius'),
 			$css
 		);
 	}
@@ -434,7 +434,7 @@ class CSSJanus {
 	private static function fixBackgroundPosition($css) {
 		$replaced = preg_replace_callback(
 			self::$patterns['bg_horizontal_percentage'],
-			array('self', 'calculateNewBackgroundPosition'),
+			array(self::class, 'calculateNewBackgroundPosition'),
 			$css
 		);
 		if ($replaced !== null) {
@@ -443,7 +443,7 @@ class CSSJanus {
 		}
 		$replaced = preg_replace_callback(
 			self::$patterns['bg_horizontal_percentage_x'],
-			array('self', 'calculateNewBackgroundPosition'),
+			array(self::class, 'calculateNewBackgroundPosition'),
 			$css
 		);
 		if ($replaced !== null) {

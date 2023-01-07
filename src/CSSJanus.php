@@ -23,7 +23,7 @@
  */
 
 /**
- * CSSJanus is a a utility that converts CSS stylesheets
+ * CSSJanus is a utility that converts CSS stylesheets
  * from left-to-right (LTR) to right-to-left (RTL).
  */
 class CSSJanus {

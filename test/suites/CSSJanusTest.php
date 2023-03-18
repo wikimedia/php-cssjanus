@@ -1,43 +1,46 @@
 <?php
 
+/**
+ * @covers CSSJanus
+ */
 class CSSJanusTest extends PHPUnit\Framework\TestCase {
 
 	public static function provideData() {
 		$data = self::getSpec();
-		$cases = array();
-		foreach ($data as $name => $test) {
-			if (isset($test['args']) || isset($test['options'])) {
+		$cases = [];
+		foreach ( $data as $name => $test ) {
+			if ( isset( $test['args'] ) || isset( $test['options'] ) ) {
 				// v1.2.0 test format
-				$args = isset($test['args']) ? $test['args'] :
-					(isset($test['options']) ? array( $test['options'] ) : array());
+				$args = isset( $test['args'] ) ? $test['args'] :
+					( isset( $test['options'] ) ? [ $test['options'] ] : [] );
 			} else {
 				// v1.1.x test format
-				$args = array(
-					!empty($test['settings']['swapLtrRtlInUrl']),
-					!empty($test['settings']['swapLeftRightInUrl'])
-				);
+				$args = [
+					!empty( $test['settings']['swapLtrRtlInUrl'] ),
+					!empty( $test['settings']['swapLeftRightInUrl'] )
+				];
 			}
-			foreach ($test['cases'] as $i => $case) {
+			foreach ( $test['cases'] as $i => $case ) {
 				$input = $case[0];
-				$noop = !isset($case[1]);
+				$noop = !isset( $case[1] );
 				$output = $noop ? $input : $case[1];
-				$roundtrip = isset($test['roundtrip']) ? $test['roundtrip'] : !$noop;
+				$roundtrip = isset( $test['roundtrip'] ) ? $test['roundtrip'] : !$noop;
 
-				$cases[] = array(
+				$cases[] = [
 					$input,
 					$args,
 					$output,
 					$name,
-				);
+				];
 
-				if ($roundtrip) {
+				if ( $roundtrip ) {
 					// Round trip
-					$cases[] = array(
+					$cases[] = [
 						$output,
 						$args,
 						$input,
 						$name,
-					);
+					];
 				}
 			}
 		}
@@ -47,34 +50,34 @@ class CSSJanusTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideData
 	 */
-	public function testTransform($input, $args, $output, $name) {
-		array_unshift($args, $input);
+	public function testTransform( $input, $args, $output, $name ) {
+		array_unshift( $args, $input );
 		$this->assertEquals(
 			$output,
-			call_user_func_array('CSSJanus::transform', $args),
+			call_user_func_array( 'CSSJanus::transform', $args ),
 			$name
 		);
 	}
 
 	protected static function getSpec() {
 		static $json;
-		if ($json == null) {
+		if ( $json == null ) {
 			$version = '2.1.0';
-			$dir = dirname(__DIR__);
+			$dir = dirname( __DIR__ );
 			$file = "$dir/data-v$version.json";
-			if (!is_readable($file)) {
-				array_map('unlink', glob("$dir/data-v*.json"));
+			if ( !is_readable( $file ) ) {
+				array_map( 'unlink', glob( "$dir/data-v*.json" ) );
 				$json = file_get_contents(
 					"https://raw.githubusercontent.com/cssjanus/cssjanus/v$version/test/data.json"
 				);
-				if ($json === false) {
-					throw new Exception('Failed to fetch data');
+				if ( $json === false ) {
+					throw new Exception( 'Failed to fetch data' );
 				}
-				file_put_contents($file, $json);
+				file_put_contents( $file, $json );
 			} else {
-				$json = file_get_contents($file);
+				$json = file_get_contents( $file );
 			}
 		}
-		return json_decode($json, /* $assoc = */ true);
+		return json_decode( $json, /* $assoc = */ true );
 	}
 }

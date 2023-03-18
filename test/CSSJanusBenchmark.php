@@ -6,29 +6,29 @@ class CSSJanusBenchmark {
 	/**
 	 * @param null|array<string,string> $fixtures Map from label to input CSS
 	 */
-	public function __construct(array $fixtures = null) {
+	public function __construct( array $fixtures = null ) {
 		$this->fixtures = $fixtures ?? self::getFixtures();
 	}
 
 	public function run() {
-		foreach ($this->fixtures as $name => $data) {
+		foreach ( $this->fixtures as $name => $data ) {
 			$iterations = 10_000;
 			$total = 0;
 			$max = -INF;
 			$i = 0;
-			for ($i = 1; $i <= $iterations; $i++) {
-				$start = microtime(true);
-				CSSJanus::transform($data, [ 'transformDirInUrl' => true ]);
-				$took = ( microtime(true) - $start) * 1000;
-				$max = max($max, $took);
-				$total += ( microtime(true) - $start) * 1000;
+			for ( $i = 1; $i <= $iterations; $i++ ) {
+				$start = microtime( true );
+				CSSJanus::transform( $data, [ 'transformDirInUrl' => true ] );
+				$took = ( microtime( true ) - $start ) * 1000;
+				$max = max( $max, $took );
+				$total += ( microtime( true ) - $start ) * 1000;
 			}
-			$this->outputStat($name, $data, $iterations, $total, $max);
+			$this->outputStat( $name, $data, $iterations, $total, $max );
 		}
 	}
 
-	protected function outputStat($name, $data, $iterations, $total, $max) {
-		$version = hash('fnv132', $data);
+	protected function outputStat( $name, $data, $iterations, $total, $max ) {
+		$version = hash( 'fnv132', $data );
 		$mean = $total / $iterations; // in milliseconds
 		$ratePerSecond = 1.0 / ( $mean / 1000.0 );
 
@@ -42,9 +42,9 @@ class CSSJanusBenchmark {
 		);
 	}
 
-	private function formatSize($size) {
-		$i = floor(log($size, 1024));
-		return round($size / pow(1024, $i), [0,0,2,2,3][$i]) . ' ' . ['B','KB','MB','GB','TB'][$i];
+	private function formatSize( $size ) {
+		$i = floor( log( $size, 1024 ) );
+		return round( $size / pow( 1024, $i ), [ 0,0,2,2,3 ][$i] ) . ' ' . [ 'B','KB','MB','GB','TB' ][$i];
 	}
 
 	protected function getFixtures() {
@@ -62,17 +62,17 @@ class CSSJanusBenchmark {
 		];
 		$result = [];
 		$dir = __DIR__;
-		foreach ($fixtures as $name => $desc) {
+		foreach ( $fixtures as $name => $desc ) {
 			$file = "{$dir}/data-fixture-{$name}.{$desc['version']}.css";
-			if (!is_readable($file)) {
-				array_map('unlink', glob("{$dir}/data-fixture-{$name}.*"));
-				$data = file_get_contents($desc['src']);
-				if ($data === false) {
-					throw new Exception("Failed to fetch fixture: {$name}");
+			if ( !is_readable( $file ) ) {
+				array_map( 'unlink', glob( "{$dir}/data-fixture-{$name}.*" ) );
+				$data = file_get_contents( $desc['src'] );
+				if ( $data === false ) {
+					throw new Exception( "Failed to fetch fixture: {$name}" );
 				}
-				file_put_contents($file, $data);
+				file_put_contents( $file, $data );
 			} else {
-				$data = file_get_contents($file);
+				$data = file_get_contents( $file );
 			}
 			$result[$name] = $data;
 		}

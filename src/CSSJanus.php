@@ -322,12 +322,8 @@ class CSSJanus {
 	 */
 	private static function calculateBorderRadius($matches) {
 		$pre = $matches[1];
-		$firstGroup = array_filter(array_slice($matches, 2, 4), function ($match) {
-			return $match !== '';
-		});
-		$secondGroup = array_filter(array_slice($matches, 6, 4), function ($match) {
-			return $match !== '';
-		});
+		$firstGroup = array_filter(array_slice($matches, 2, 4), 'strlen');
+		$secondGroup = array_filter(array_slice($matches, 6, 4), 'strlen');
 		$post = $matches[10] ?: '';
 
 		if ($secondGroup) {

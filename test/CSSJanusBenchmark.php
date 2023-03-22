@@ -4,8 +4,7 @@ class CSSJanusBenchmark {
 
 	public function run() {
 		foreach (self::getFixtures() as $name => $data) {
-			$iterations = 1000;
-			$this->outputIntro($name, $data, $iterations);
+			$iterations = 10_000;
 			$total = 0;
 			$max = -INF;
 			$i = 0;
@@ -16,23 +15,23 @@ class CSSJanusBenchmark {
 				$max = max($max, $took);
 				$total += ( microtime(true) - $start) * 1000;
 			}
-			$this->outputStat($total, $max, $iterations);
+			$this->outputStat($name, $data, $iterations, $total, $max);
 		}
 	}
 
-	protected function outputIntro($name, $data, $iterations) {
-		echo "\n## {$name}\n"
-			. "- data length: " . $this->formatSize(strlen($data)) . "\n"
-			. "- data hash:   " . hash('fnv132', $data) . "\n"
-			. "- iterations:  " . $iterations . "\n";
-	}
-
-	protected function outputStat($total, $max, $iterations) {
+	protected function outputStat($name, $data, $iterations, $total, $max) {
+		$version = hash('fnv132', $data);
 		$mean = $total / $iterations; // in milliseconds
 		$ratePerSecond = 1.0 / ( $mean / 1000.0 );
-		echo "- max:         " . sprintf('%.2fms', $max) . "\n";
-		echo "- mean:        " . sprintf('%.2fms', $mean) . "\n";
-		echo "- rate:        " . sprintf('%.0f/s', $ratePerSecond) . "\n";
+
+		echo sprintf(
+			"* %-35s iterations=%d max=%.2fms mean=%.2fms rate=%.0f/s\n",
+			"$name ($version)",
+			$iterations,
+			$max,
+			$mean,
+			$ratePerSecond
+		);
 	}
 
 	private function formatSize($size) {

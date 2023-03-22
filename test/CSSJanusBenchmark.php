@@ -1,9 +1,17 @@
 <?php
 
 class CSSJanusBenchmark {
+	private $fixtures;
+
+	/**
+	 * @param null|array<string,string> $fixtures Map from label to input CSS
+	 */
+	public function __construct(array $fixtures = null) {
+		$this->fixtures = $fixtures ?? self::getFixtures();
+	}
 
 	public function run() {
-		foreach (self::getFixtures() as $name => $data) {
+		foreach ($this->fixtures as $name => $data) {
 			$iterations = 10_000;
 			$total = 0;
 			$max = -INF;

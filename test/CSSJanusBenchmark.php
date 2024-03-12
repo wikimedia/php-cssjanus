@@ -44,7 +44,7 @@ class CSSJanusBenchmark {
 
 	private function formatSize( $size ) {
 		$i = floor( log( $size, 1024 ) );
-		return round( $size / pow( 1024, $i ), [ 0,0,2,2,3 ][$i] ) . ' ' . [ 'B','KB','MB','GB','TB' ][$i];
+		return round( $size / pow( 1024, $i ), [ 0, 0, 2, 2, 3 ][$i] ) . ' ' . [ 'B', 'KB', 'MB', 'GB', 'TB' ][$i];
 	}
 
 	protected function getFixtures() {

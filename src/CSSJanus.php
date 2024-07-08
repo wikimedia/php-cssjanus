@@ -93,6 +93,12 @@ class CSSJanus {
 		$patterns['ident'] = "-?{$patterns['nmstart']}{$patterns['nmchar']}*";
 		$patterns['quantity'] = "{$patterns['num']}(?:\s*{$patterns['unit']}|{$patterns['ident']})?";
 		$patterns['possibly_negative_quantity'] = "((?:-?{$patterns['quantity']})|(?:inherit|auto))";
+		$patterns['possibly_negative_simple_quantity'] = "(?:-?{$patterns['num']}(?:\s*{$patterns['unit']})?)";
+		$patterns['math_operator'] = '(?:\+|\-|\*|\/)';
+		$patterns['allowed_chars'] = '(?:\(|\)|\t| )';
+		$patterns['calc_equation'] = "(?:{$patterns['allowed_chars']}|{$patterns['possibly_negative_simple_quantity']}|{$patterns['math_operator']}){3,}";
+		$patterns['calc'] = "(?:calc\((?:{$patterns['calc_equation']})\))";
+		$patterns['possibly_negative_quantity_calc'] = "((?:-?{$patterns['quantity']})|(?:inherit|auto)|{$patterns['calc']})";
 		$patterns['color'] = "(#?{$patterns['nmchar']}+|(?:rgba?|hsla?)\([ \d.,%-]+\))";
 		// Use "*+" instead of "*?" to avoid reaching the backtracking limit.
 		// <https://phabricator.wikimedia.org/T326481>, <https://phabricator.wikimedia.org/T215746#4944830>.
@@ -113,7 +119,7 @@ class CSSJanus {
 		$patterns['cursor_east'] = "/{$patterns['lookbehind_not_letter']}([ns]?)e-resize/";
 		$patterns['cursor_west'] = "/{$patterns['lookbehind_not_letter']}([ns]?)w-resize/";
 		$patterns['four_notation_quantity_props'] = "((?:margin|padding|border-width)\s*:\s*)";
-		$patterns['four_notation_quantity'] = "/{$patterns['four_notation_quantity_props']}{$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}(\s+){$patterns['possibly_negative_quantity']}{$patterns['suffix']}/i";
+		$patterns['four_notation_quantity'] = "/{$patterns['four_notation_quantity_props']}{$patterns['possibly_negative_quantity_calc']}(\s+){$patterns['possibly_negative_quantity_calc']}(\s+){$patterns['possibly_negative_quantity_calc']}(\s+){$patterns['possibly_negative_quantity_calc']}{$patterns['suffix']}/i";
 		$patterns['four_notation_color'] = "/((?:-color|border-style)\s*:\s*){$patterns['color']}(\s+){$patterns['color']}(\s+){$patterns['color']}(\s+){$patterns['color']}{$patterns['suffix']}/i";
 		// border-radius: <length or percentage>{1,4} [optional: / <length or percentage>{1,4} ]
 		$patterns['border_radius'] = '/(border-radius\s*:\s*)' . $patterns['possibly_negative_quantity']

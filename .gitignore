@@ -1,6 +1,6 @@
 /coverage/
 /doc/
-/test/data-*
+/test/data-fixture*
 /vendor/
 /.idea
 /.phpunit.result.cache

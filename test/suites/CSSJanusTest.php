@@ -60,24 +60,14 @@ class CSSJanusTest extends PHPUnit\Framework\TestCase {
 	}
 
 	protected static function getSpec() {
-		static $json;
-		if ( $json == null ) {
-			$version = '2.3.0';
-			$dir = dirname( __DIR__ );
-			$file = "$dir/data-v$version.json";
-			if ( !is_readable( $file ) ) {
-				array_map( 'unlink', glob( "$dir/data-v*.json" ) );
-				$json = file_get_contents(
-					"https://raw.githubusercontent.com/wikimedia/node-cssjanus/v$version/test/data.json"
-				);
-				if ( $json === false ) {
-					throw new Exception( 'Failed to fetch data' );
-				}
-				file_put_contents( $file, $json );
-			} else {
-				$json = file_get_contents( $file );
-			}
+		$version = '2.3.0';
+		$dir = dirname( __DIR__ );
+		$file = "$dir/data-v$version.json";
+
+		if ( !is_readable( $file ) ) {
+			throw new Exception( 'Failed to fetch data...
+					Did you run composer fetch-data with the correct version?' );
 		}
-		return json_decode( $json, /* $assoc = */ true );
+		return json_decode( file_get_contents( $file ), /* $assoc = */ true );
 	}
 }

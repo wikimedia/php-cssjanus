@@ -6,7 +6,7 @@ class CSSJanusBenchmark {
 	/**
 	 * @param null|array<string,string> $fixtures Map from label to input CSS
 	 */
-	public function __construct( array $fixtures = null ) {
+	public function __construct( ?array $fixtures = null ) {
 		$this->fixtures = $fixtures ?? self::getFixtures();
 	}
 

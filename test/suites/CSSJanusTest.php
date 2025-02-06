@@ -54,7 +54,7 @@ class CSSJanusTest extends PHPUnit\Framework\TestCase {
 		array_unshift( $args, $input );
 		$this->assertEquals(
 			$output,
-			call_user_func_array( 'CSSJanus::transform', $args ),
+			CSSJanus::transform( ...$args ),
 			$name
 		);
 	}

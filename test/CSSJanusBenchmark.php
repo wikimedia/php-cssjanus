@@ -1,7 +1,7 @@
 <?php
 
 class CSSJanusBenchmark {
-	private $fixtures;
+	private array $fixtures;
 
 	/**
 	 * @param null|array<string,string> $fixtures Map from label to input CSS
@@ -27,7 +27,7 @@ class CSSJanusBenchmark {
 		}
 	}
 
-	protected function outputStat( $name, $data, $iterations, $total, $max ) {
+	protected function outputStat( string $name, array $data, int $iterations, float $total, float $max ) {
 		$version = hash( 'fnv132', $data );
 		$mean = $total / $iterations; // in milliseconds
 		$ratePerSecond = 1.0 / ( $mean / 1000.0 );
@@ -42,12 +42,12 @@ class CSSJanusBenchmark {
 		);
 	}
 
-	private function formatSize( $size ) {
+	private function formatSize( int $size ): int {
 		$i = floor( log( $size, 1024 ) );
 		return round( $size / pow( 1024, $i ), [ 0, 0, 2, 2, 3 ][$i] ) . ' ' . [ 'B', 'KB', 'MB', 'GB', 'TB' ][$i];
 	}
 
-	protected function getFixtures() {
+	protected function getFixtures(): array {
 		$fixtures = [
 			'mediawiki-legacy-shared' => [
 				'version' => '1064426',

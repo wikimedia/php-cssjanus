@@ -89,7 +89,7 @@ class CSSJanus {
 			'suffix' => '(\s*(?:!important\s*)?[;}])'
 		];
 
-		// @codingStandardsIgnoreStart Generic.Files.LineLength.TooLong
+		// phpcs:disable Generic.Files.LineLength.TooLong
 		$patterns['escape'] = "(?:{$patterns['unicode']}|\\\\[^\\r\\n\\f0-9a-f])";
 		$patterns['nmstart'] = "(?:[_a-z]|{$patterns['nonAscii']}|{$patterns['escape']})";
 		$patterns['nmchar'] = "(?:[_a-z0-9-]|{$patterns['nonAscii']}|{$patterns['escape']})";
@@ -137,7 +137,7 @@ class CSSJanus {
 		$patterns['bg_horizontal_percentage_x'] = "/(background-position-x\s*:\s*)(-?{$patterns['num']}%)/i";
 		$patterns['translate_x'] = "/(transform\s*:[^;}]*)(translateX\s*\(\s*){$patterns['possibly_negative_quantity']}(\s*\))/i";
 		$patterns['translate'] = "/(transform\s*:[^;}]*)(translate\s*\(\s*){$patterns['possibly_negative_quantity']}((?:\s*,\s*{$patterns['possibly_negative_quantity']}){0,2}\s*\))/i";
-		// @codingStandardsIgnoreEnd
+		// phpcs:enable
 
 		self::$patterns = $patterns;
 	}

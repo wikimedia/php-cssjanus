@@ -1,4 +1,4 @@
-[![Packagist](https://img.shields.io/packagist/v/cssjanus/cssjanus.svg?style=flat)](https://packagist.org/packages/cssjanus/cssjanus)
+[![Packagist](https://img.shields.io/packagist/v/wikimedia/cssjanus.svg?style=flat)](https://packagist.org/packages/wikimedia/cssjanus)
 
 # CSSJanus
 

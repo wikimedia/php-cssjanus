@@ -1,5 +1,5 @@
 {
-	"name": "cssjanus/cssjanus",
+	"name": "wikimedia/cssjanus",
 	"description": "Convert CSS stylesheets between left-to-right and right-to-left.",
 	"license": "Apache-2.0",
 	"homepage": "https://www.mediawiki.org/wiki/CSSJanus",

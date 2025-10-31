@@ -2,6 +2,7 @@
 
 /**
  * @covers CSSJanus
+ * @covers CSSJanusTokenizer
  */
 class CSSJanusTest extends PHPUnit\Framework\TestCase {
 

@@ -9,6 +9,7 @@
 	<rule ref="MediaWiki.Commenting.RedundantVarName.Found">
 		<severity>0</severity>
 	</rule>
+	<rule ref="Generic.PHP.RequireStrictTypes" />
 	<file>.</file>
 	<arg name="encoding" value="UTF-8"/>
 	<arg name="extensions" value="php"/>

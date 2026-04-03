@@ -1,4 +1,6 @@
 <?php
+declare( strict_types = 1 );
+
 /**
  * PHP port of CSSJanus. https://www.mediawiki.org/wiki/CSSJanus
  *

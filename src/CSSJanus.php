@@ -437,7 +437,7 @@ class CSSJanus {
 	private static function fixBackgroundPosition( $css ) {
 		$callback = static function ( $matches ) {
 			$value = $matches[2];
-			if ( substr( $value, -1 ) === '%' ) {
+			if ( str_ends_with( $value, '%' ) ) {
 				$idx = strpos( $value, '.' );
 				if ( $idx !== false ) {
 					$len = strlen( $value ) - $idx - 2;

@@ -62,7 +62,7 @@ class CSSJanusTest extends PHPUnit\Framework\TestCase {
 	}
 
 	protected static function getSpec() {
-		$version = '2.3.0';
+		$version = '2.3.1';
 		$dir = dirname( __DIR__ );
 		$file = "$dir/data-v$version.json";
 

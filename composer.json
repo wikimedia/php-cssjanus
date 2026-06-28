@@ -44,7 +44,7 @@
 		"phpcs": "phpcs -sp",
 		"fetch-data": [
 			"rm -f test/data-v*.json",
-			"curl https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/libs/node-cssjanus/+/refs/tags/v2.3.0/test/data.json?format=TEXT | base64 --decode > test/data-v2.3.0.json"
+			"curl https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/libs/node-cssjanus/+/refs/tags/v2.3.1/test/data.json?format=TEXT | base64 --decode > test/data-v2.3.1.json"
 		]
 	},
 	"config": {

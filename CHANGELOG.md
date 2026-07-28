@@ -1,5 +1,10 @@
 # Release History
 
+## v2.3.1
+
+* Port [upstream changes v2.3.1](https://gerrit.wikimedia.org/g/mediawiki/libs/node-cssjanus/):
+  * Fix unexpected flipping of percentages in functions in background shorthand (Aidan O'Brien). [T333273](https://phabricator.wikimedia.org/T333273)
+
 ## v2.3.0
 
 * Port [upstream changes v2.3.0](https://gerrit.wikimedia.org/g/mediawiki/libs/node-cssjanus/):

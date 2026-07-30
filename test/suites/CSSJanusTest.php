@@ -28,20 +28,18 @@ class CSSJanusTest extends PHPUnit\Framework\TestCase {
 				$output = $noop ? $input : $case[1];
 				$roundtrip = isset( $test['roundtrip'] ) ? $test['roundtrip'] : !$noop;
 
-				$cases[] = [
+				$cases[$name . ' #' . $i] = [
 					$input,
 					$args,
 					$output,
-					$name,
 				];
 
 				if ( $roundtrip ) {
 					// Round trip
-					$cases[] = [
+					$cases[$name . ' #' . $i . ' (round trip)'] = [
 						$output,
 						$args,
 						$input,
-						$name,
 					];
 				}
 			}
@@ -52,13 +50,8 @@ class CSSJanusTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideData
 	 */
-	public function testTransform( $input, $args, $output, $name ) {
-		array_unshift( $args, $input );
-		$this->assertEquals(
-			$output,
-			CSSJanus::transform( ...$args ),
-			$name
-		);
+	public function testTransform( $input, $args, $output ) {
+		$this->assertEquals( $output, CSSJanus::transform( $input, ...$args ) );
 	}
 
 	protected static function getSpec() {
@@ -70,6 +63,6 @@ class CSSJanusTest extends PHPUnit\Framework\TestCase {
 			throw new Exception( 'Failed to fetch data...
 					Did you run composer fetch-data with the correct version?' );
 		}
-		return json_decode( file_get_contents( $file ), /* $assoc = */ true );
+		return json_decode( json: file_get_contents( $file ), flags: JSON_OBJECT_AS_ARRAY | JSON_THROW_ON_ERROR );
 	}
 }
